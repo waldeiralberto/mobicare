@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+      args: 
+        - MYSQL_DATABASE=default_database
+        - MYSQL_USER=notes-api
+        - MYSQL_PASSWORD=notes-api
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    image: teste-mysql
+    ports:
+      - "3306:3306"
+    container_name: teste-mysql
+    networks: 
+      - app-network
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: nodejs.Dockerfile
+    image: teste-nodejs
+    container_name: teste-nodejs
+    command: npm start
+    depends_on: 
+      - mysql
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network    
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    image: teste-nginx
+    container_name: teste-nginx
+    ports: 
+      - "80:80"
+    networks:
+      - app-network
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+networks:
+  app-network:
+    driver: bridge
