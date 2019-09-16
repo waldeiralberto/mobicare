@@ -33,10 +33,7 @@ services:
       - app-network    
 
   nginx:
-    build:
-      context: .
-      dockerfile: nginx.Dockerfile
-    image: teste-nginx
+    image: nginx
     container_name: teste-nginx
     ports: 
       - "80:80"

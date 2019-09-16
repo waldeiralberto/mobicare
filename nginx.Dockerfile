@@ -1,5 +1,5 @@
 FROM nginx
 
-COPY app.conf /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/
 
 CMD [ "nginx" ]
