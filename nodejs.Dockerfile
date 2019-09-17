@@ -1,13 +1,13 @@
 FROM node
 
-RUN mkdir -p /home/node/app
-WORKDIR /home/node/app
+WORKDIR /usr/src/app
 
-COPY package.json ./
-COPY server.js ./
+COPY package*.json ./
 
 RUN npm install
 
+COPY server.js ./
+
 EXPOSE 8080
 
-CMD [ "nodejs", "/home/node/app/server.js" ]
+CMD [ "node", "server.js" ]

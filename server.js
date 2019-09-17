@@ -2,13 +2,13 @@
 var errors = require('restify-errors');
 var mysql = require('mysql');
 
-var port = process.env.NODEJS_API_PORT;
-//var port = process.env.PORT;
-if (!port) {
-    port = 8888;
-}
+//var port = process.env.NODEJS_API_PORT;
+var port = process.env.PORT || 8080;
+//if (!port) {
+//    port = 8888;
+//}
 var connection = mysql.createConnection({
-	host: 'localhost',
+	host: 'teste-mysql',
 	user: 'notes-api',
 	password: 'notes-api'
 });
